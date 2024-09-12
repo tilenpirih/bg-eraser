@@ -72,14 +72,6 @@ export default defineNuxtPlugin(app => {
         height: '12',
         color: 'primary',
       },
-      VTextField: {
-        color: 'primary',
-        variant: 'outlined',
-      },
-      VTextarea: {
-        color: 'primary',
-        variant: 'outlined',
-      },
     },
   })
 

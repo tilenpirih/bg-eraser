@@ -3,5 +3,7 @@
 </script>
 
 <template>
-  <div>test</div>
+  <div>
+    <dropzone />
+  </div>
 </template>

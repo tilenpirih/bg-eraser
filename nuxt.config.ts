@@ -12,6 +12,7 @@ export default defineNuxtConfig({
   css: ['@/assets/css/main.scss'],
   modules: [
     '@vueuse/nuxt',
+    '@pinia/nuxt',
     (_options, nuxt) => {
       nuxt.hooks.hook('vite:extendConfig', config => {
         // @ts-expect-error
