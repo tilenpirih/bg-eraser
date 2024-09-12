@@ -5,5 +5,6 @@
 <template>
   <div>
     <dropzone />
+    <gallery />
   </div>
 </template>
