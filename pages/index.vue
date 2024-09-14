@@ -5,6 +5,7 @@
 <template>
   <div>
     <dropzone />
+    <settings />
     <gallery />
   </div>
 </template>

@@ -7,13 +7,15 @@ export interface TImage {
   image: File
   status: 'PENDING' | 'PROCESSING' | 'FINISHED' | 'ERROR'
   name: string
-  extension: string
+  originalExtension: string
+  processedExtension: string | null
+  config: Config
 }
 const config: Config = {
   debug: false,
   device: 'gpu',
   output: {
-    quality: 0.9,
+    quality: 0.8,
     format: 'image/png',
   },
 }
@@ -31,7 +33,7 @@ export const useImageStore = defineStore('image', {
       for (const image of images) {
         const name = image.name.split('.')[0]
         const extension = image.name.split('.').pop()
-        if(extension?.toUpperCase() !== 'PNG' && extension?.toUpperCase() !== 'JPG' && extension?.toUpperCase() !== 'JPEG' && extension?.toUpperCase() !== 'WEBP') {
+        if (extension?.toUpperCase() !== 'PNG' && extension?.toUpperCase() !== 'JPG' && extension?.toUpperCase() !== 'JPEG' && extension?.toUpperCase() !== 'WEBP') {
           continue
         }
         this.images.unshift({
@@ -40,7 +42,9 @@ export const useImageStore = defineStore('image', {
           image,
           status: 'PENDING',
           name,
-          extension,
+          originalExtension: extension,
+          processedExtension: null,
+          config: this.config,
         })
       }
       if (!this.processing) {
@@ -55,12 +59,17 @@ export const useImageStore = defineStore('image', {
       }
       this.processing = true
       image.status = 'PROCESSING'
-
-      const response = await removeBackground(image.image, this.config)
+      const response = await removeBackground(image.image, image.config)
 
       const processedUrl = URL.createObjectURL(response)
       image.processedUrl = processedUrl
       image.status = 'FINISHED'
+      if (this.config?.output?.format) {
+        image.processedExtension = this.config.output.format.split('/')[1]
+      }
+      else {
+        image.processedExtension = 'png'
+      }
       const finished = this.images.some(image => image.status === 'PENDING')
 
       if (!finished) {
