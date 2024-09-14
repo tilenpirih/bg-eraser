@@ -52,7 +52,7 @@ const { isOverDropZone } = useDropZone(dropZoneRef, {
       accept="image/jpeg,image/jpg,image/png,image/webp"
       multiple
       @change="onFilesSelected"
-    >
+  >
   </v-container>
 </template>
 

@@ -1,29 +1,14 @@
 <script setup lang="ts">
 import { mdiMenu } from '@mdi/js'
-import { useDisplay, useGoTo } from 'vuetify'
+import { useDisplay } from 'vuetify'
 
 const { smAndUp, xs } = useDisplay()
-const goTo = useGoTo()
 const hasScrolled = ref(false)
 const drawer = ref(false)
 const tabs = ref([
-  { title: 'Home', to: '#about' },
-  { title: 'About', to: '#skills' },
-  { title: 'Donate', to: '#projects' },
+  { title: 'Home', to: '/' },
+  { title: 'About', to: '/about' },
 ])
-
-function onScroll() {
-  hasScrolled.value = window.scrollY > 8
-}
-
-onMounted(() => {
-  window.addEventListener('scroll', onScroll)
-  onScroll()
-})
-
-onUnmounted(() => {
-  window.removeEventListener('scroll', onScroll)
-})
 </script>
 
 <template>
@@ -35,7 +20,7 @@ onUnmounted(() => {
             <v-btn v-if="xs" variant="text" size="small" :icon="mdiMenu" @click="drawer = !drawer" />
           </div>
           <div v-if="smAndUp">
-            <v-btn v-for="tab in tabs" :key="tab.to" variant="text" rounded="xl" class="mx-1" @click="goTo(tab.to, { offset: -80 })">
+            <v-btn v-for="tab in tabs" :key="tab.to" variant="text" rounded="xl" class="mx-1" :to="tab.to">
               {{ tab.title }}
             </v-btn>
           </div>
@@ -46,7 +31,7 @@ onUnmounted(() => {
       </div>
       <v-navigation-drawer v-model="drawer" temporary app class="px-3 bg-blur" width="600">
         <div class="d-flex justify-center h-100 flex-column">
-          <v-btn v-for="tab in tabs" :key="tab.to" size="large" variant="text" rounded="xl" class="mx-1 w-100" @click="goTo(tab.to, { offset: -80 }); drawer = false">
+          <v-btn v-for="tab in tabs" :key="tab.to" size="large" variant="text" rounded="xl" class="mx-1 w-100" :to="tab.to" @click="drawer = false">
             {{ tab.title }}
           </v-btn>
         </div>

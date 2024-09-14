@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { mdiCog } from '@mdi/js'
 import { useImageStore } from '@/store/images'
 
 const imageStore = useImageStore()
@@ -15,6 +16,7 @@ if (imageStore?.config?.output?.quality) {
     <div class="d-flex justify-center">
       <v-btn class="rounded-lg" @click="expanded = !expanded">
         {{ buttonText }}
+        <v-icon :icon="mdiCog" size="large" class="ml-2" />
       </v-btn>
     </div>
     <v-expand-transition>
