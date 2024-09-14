@@ -2,7 +2,19 @@
 import { useImageStore } from '@/store/images'
 
 const imageStore = useImageStore()
-console.log(imageStore.images)
+
+async function downloadAll() {
+  const zip = new JSZip()
+  imageStore.images.forEach(image => {
+    const filename = image.name
+    const ext = image.extension
+    const processedUrl = image.processedUrl
+    console.log(filename, ext, processedUrl)
+    zip.file(image.processedUrl, image.processedUrl)
+  })
+  const content = await zip.generateAsync({ type: 'blob' })
+  saveAs(content, 'images.zip')
+}
 </script>
 
 <template>
@@ -15,13 +27,15 @@ console.log(imageStore.images)
       </div>
     </div>
     <v-row>
-      <v-col v-for="image in imageStore.images" :key="image.originalUrl" cols="12" sm="3">
-        <v-card rounded="lg">
-          <v-img v-if="image.status === 'FINISHED' && image.processedUrl" :src="image.processedUrl" />
-          <v-img v-else :src="image.originalUrl" />
-        </v-card>
+      <v-col v-for="image in imageStore.images" :key="image.originalUrl" cols="12" sm="6" md="4" lg="3" xl="2">
+        <gallery-image :image="image" />
       </v-col>
     </v-row>
+    <div v-if="imageStore.images.length > 1">
+      <v-btn @click="downloadAll()">
+        download all images
+      </v-btn>
+    </div>
   </v-container>
 </template>
 

@@ -1,8 +1,8 @@
 <script setup lang="ts">
 useHead({
-  title: 'Tilen Pirih - Fullstack developer',
+  title: 'Free image background remover',
   meta: [
-    { name: 'description', content: 'My portfolio' },
+    { name: 'description', content: 'Remove background from images for free. Original quality' },
   ],
 })
 </script>
