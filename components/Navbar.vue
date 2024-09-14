@@ -9,6 +9,17 @@ const tabs = ref([
   { title: 'Home', to: '/' },
   { title: 'About', to: '/about' },
 ])
+function onScroll() {
+  hasScrolled.value = window.scrollY > 8
+}
+onMounted(() => {
+  window.addEventListener('scroll', onScroll)
+  onScroll()
+})
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', onScroll)
+})
 </script>
 
 <template>
