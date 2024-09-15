@@ -9,12 +9,11 @@ import { sl } from 'vuetify/locale'
 const defaultTheme: ThemeDefinition = {
   dark: true,
   colors: {
-    primary: '#a8c8ff',
-    secondary: '#bdc7dc',
-    background: '#111318',
-    surface: '#1d2024',
-    danger: '#FE4543',
-    text: '#d5e3ff',
+    primary: '#83d2e4',
+    secondary: '#b1cbd1',
+    background: '#0e1416',
+    surface: '#1b2122',
+    danger: '#93000a',
   },
 }
 
@@ -26,6 +25,7 @@ if (import.meta.client) {
     defaultTheme.colors.secondary = localTheme.secondary
     defaultTheme.colors.background = localTheme.background
     defaultTheme.colors.surface = localTheme.surface
+    defaultTheme.colors.danger = localTheme.danger
     if (localTheme.danger)
       defaultTheme.colors.danger = localTheme.danger
     if (localTheme.error)
