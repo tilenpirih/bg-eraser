@@ -11,6 +11,7 @@ export interface TImage {
   processedExtension: string | null
   config: Config
 }
+
 const config: Config = {
   debug: false,
   device: 'gpu',
@@ -19,9 +20,11 @@ const config: Config = {
     format: 'image/png',
   },
 }
+
 if (import.meta.client) {
   preload(config)
 }
+
 export const useImageStore = defineStore('image', {
   state: () => ({
     images: [] as TImage[],
@@ -32,53 +35,66 @@ export const useImageStore = defineStore('image', {
     addImages(images: File[]) {
       for (const image of images) {
         const name = image.name.split('.')[0]
-        const extension = image.name.split('.').pop()
-        if (extension?.toUpperCase() !== 'PNG' && extension?.toUpperCase() !== 'JPG' && extension?.toUpperCase() !== 'JPEG' && extension?.toUpperCase() !== 'WEBP') {
+        const extension = image.name.split('.').pop()?.toUpperCase()
+
+        const validExtensions = ['PNG', 'JPG', 'JPEG', 'WEBP']
+        if (!validExtensions.includes(extension || '')) {
+          console.warn(`File ${image.name} has an unsupported format: ${extension}`)
           continue
         }
+
         this.images.unshift({
           originalUrl: URL.createObjectURL(image),
           processedUrl: null,
           image,
           status: 'PENDING',
           name,
-          originalExtension: extension,
+          originalExtension: extension || '',
           processedExtension: null,
           config: this.config,
         })
       }
+
       if (!this.processing) {
         this.processLastImage()
       }
     },
     async processLastImage() {
-      const image = this.images.slice().reverse().find(image => image.status === 'PENDING')
-      if (!image) {
+      const pendingImage = this.images.slice().reverse().find(image => image.status === 'PENDING')
+      if (!pendingImage) {
         this.processing = false
         return
       }
+
       this.processing = true
-      image.status = 'PROCESSING'
-      const response = await removeBackground(image.image, image.config)
+      pendingImage.status = 'PROCESSING'
 
-      const processedUrl = URL.createObjectURL(response)
-      image.processedUrl = processedUrl
-      image.status = 'FINISHED'
-      if (this.config?.output?.format) {
-        image.processedExtension = this.config.output.format.split('/')[1]
-      }
-      else {
-        image.processedExtension = 'png'
-      }
-      const finished = this.images.some(image => image.status === 'PENDING')
+      try {
+        const response = await removeBackground(pendingImage.image, pendingImage.config)
 
-      if (!finished) {
-        this.processing = false
+        const processedUrl = URL.createObjectURL(response)
+        pendingImage.processedUrl = processedUrl
+        pendingImage.status = 'FINISHED'
+        if (this.config?.output?.format) {
+          pendingImage.processedExtension = this.config.output.format.split('/')[1]
+        }
+        else {
+          pendingImage.processedExtension = 'png'
+        }
       }
-      else {
+      catch (error) {
+        console.error('Error processing image:', error)
+        pendingImage.status = 'ERROR'
+      }
+
+      const hasMorePending = this.images.some(image => image.status === 'PENDING')
+
+      if (hasMorePending) {
         this.processLastImage()
+      }
+      else {
+        this.processing = false
       }
     },
   },
-
 })
