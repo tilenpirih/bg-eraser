@@ -24,8 +24,8 @@ async function downloadAll() {
 
 <template>
   <v-container>
-    <v-row>
-      <v-col v-for="image in imageStore.images" :key="image.originalUrl" cols="12" sm="6" md="4" lg="3" xl="2">
+    <v-row class="d-flex justify-center">
+      <v-col v-for="image in imageStore.images" :key="image.originalUrl" cols="12" sm="6" md="6" lg="4" xl="3">
         <gallery-image :image="image" />
       </v-col>
     </v-row>
