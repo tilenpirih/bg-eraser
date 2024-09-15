@@ -25,4 +25,4 @@ spec:
               cpu: '0.25'
           env:
             - name: BASE_URL
-              value: https://tilenpirih.com
+              value: https://bg-eraser.com
