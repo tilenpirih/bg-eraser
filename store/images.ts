@@ -19,9 +19,9 @@ const config: Config = {
     format: 'image/png',
   },
 }
-preload(config).then(() => {
-  console.log('Asset preloading succeeded')
-})
+if (import.meta.client) {
+  preload(config)
+}
 export const useImageStore = defineStore('image', {
   state: () => ({
     images: [] as TImage[],

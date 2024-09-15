@@ -4,7 +4,9 @@ export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   devtools: { enabled: false },
   runtimeConfig: {
-    BASE_URL: process.env.BASE_URL,
+    public: {
+      BASE_URL: process.env.BASE_URL,
+    },
   },
   build: {
     transpile: ['vuetify'],
