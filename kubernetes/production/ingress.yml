@@ -1,8 +1,8 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: portfolio-ingress
-  namespace: personal-tilen
+  name: bg-eraser
+  namespace: projects
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod
     cert-manager.io/acme-challenge-type: dns01
@@ -11,16 +11,16 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - tilenpirih.com
-      secretName: tilenpirih-com-cert
+        - bg-eraser.com
+      secretName: bg-eraser-com-cert
   rules:
-    - host: tilenpirih.com
+    - host: bg-eraser.com
       http:
         paths:
           - pathType: Prefix
             path: /
             backend:
               service:
-                name: portfolio
+                name: bg-eraser
                 port:
                   number: 3000

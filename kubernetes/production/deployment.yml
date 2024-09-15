@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: portfolio
-  namespace: personal-tilen
+  name: bg-eraser
+  namespace: projects
   labels:
-    app: portfolio
+    app: bg-eraser
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: portfolio
+      app: bg-eraser
   template:
     metadata:
       labels:
-        app: portfolio
+        app: bg-eraser
     spec:
       containers:
-        - name: portfolio
-          image: localhost:32000/personal/tilen/portfolio:1.0.0
+        - name: bg-eraser
+          image: localhost:32000/projects/bg-eraser:1.0.0
           imagePullPolicy: Always
           resources:
             limits:

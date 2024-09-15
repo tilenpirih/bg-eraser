@@ -1,8 +1,8 @@
 #!/bin/zsh
 
-REPOSITORY_NAME="personal/tilen"
-PROJECT_NAME="portfolio"
-ENVIRONMENT="Tilen (Portfolio)"
+REPOSITORY_NAME="projects"
+PROJECT_NAME="bg-eraser"
+ENVIRONMENT="bg-eraser"
 TAG=${1:-staging}
 
 docker build -t registry.ventic.tv/$REPOSITORY_NAME/$PROJECT_NAME:$TAG .
