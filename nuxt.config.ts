@@ -30,6 +30,9 @@ export default defineNuxtConfig({
       },
     },
   },
+  routeRules: {
+    '/**': { ssr: false },
+  },
   nitro: {
     preset: 'bun',
   },
