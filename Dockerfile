@@ -1,4 +1,4 @@
-FROM oven/bun:1.1.29 AS base
+FROM oven/bun:1.1 AS base
 
 WORKDIR /usr/src/app
 
@@ -9,13 +9,10 @@ ENV NODE_ENV=production
 COPY . /usr/src/app
 WORKDIR /usr/src/app
 RUN bun install
-RUN bun run build
+RUN bun run generate
 
-FROM base AS app
+FROM nginx:alpine AS app
 
-COPY --from=build /usr/src/app/.output /prod/app
-WORKDIR /prod/app
+COPY --from=build /usr/src/app/.output/public /usr/share/nginx/html
 
-EXPOSE 3000
-
-CMD [ "bun", "run", "server/index.mjs" ]
+EXPOSE 80
