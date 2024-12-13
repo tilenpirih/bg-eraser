@@ -41,7 +41,7 @@ if (import.meta.client) {
 export default defineNuxtPlugin(app => {
   const vuetify = createVuetify({
     components: {
-      ssr: true,
+      ssr: false,
       VNumberInput,
     },
     theme: {
