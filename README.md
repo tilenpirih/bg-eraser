@@ -26,14 +26,9 @@ Build the application for production:
 
 ```bash
 # bun
-bun run build
+bun run generate
 ```
 
-Locally preview production build:
-
-```bash
-# bun
-bun run preview
-```
+It creates
 ## deployment
 run `./pu.sh 1.0.0`
