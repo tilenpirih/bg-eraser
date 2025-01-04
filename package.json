@@ -14,7 +14,6 @@
     "@mdi/font": "^7.4.47",
     "@mdi/js": "^7.4.47",
     "@pinia/nuxt": "^0.5.4",
-
     "@vueuse/core": "^11.0.3",
     "@vueuse/nuxt": "^11.0.3",
     "file-saver": "^2.0.5",
