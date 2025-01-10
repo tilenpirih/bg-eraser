@@ -24,7 +24,7 @@ onUnmounted(() => {
 
 <template>
   <div>
-    <client-only>
+    <!-- <client-only> -->
       <div class="outerContainer px-4 pt-4">
         <div class="innerContainer d-flex align-center justify-space-between px-3" :class="{ 'scrolled bg-blur': hasScrolled }">
           <div style="width: 40px;">
@@ -47,7 +47,7 @@ onUnmounted(() => {
           </v-btn>
         </div>
       </v-navigation-drawer>
-    </client-only>
+    <!-- </client-only> -->
   </div>
 </template>
 

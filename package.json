@@ -13,22 +13,22 @@
     "@imgly/background-removal": "^1.5.7",
     "@mdi/font": "^7.4.47",
     "@mdi/js": "^7.4.47",
-    "@pinia/nuxt": "^0.5.4",
+    "@pinia/nuxt": "^0.9.0",
     "@vueuse/core": "^11.0.3",
     "@vueuse/nuxt": "^11.0.3",
     "file-saver": "^2.0.5",
     "jszip": "^3.10.1",
-    "nuxt": "^3.13.0",
-    "pinia": "^2.2.2",
-    "vue": "^3.4.38"
+    "nuxt": "^3.15.1",
+    "pinia": "^2.3.0",
+    "vue": "^3.5.13"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^2.26.0",
+    "@antfu/eslint-config": "^3.13.0",
     "@types/file-saver": "^2.0.7",
-    "eslint": "9.5.0",
-    "eslint-plugin-format": "^0.1.2",
-    "sass": "^1.77.8",
+    "eslint": "9.17.0",
+    "eslint-plugin-format": "^1.0.1",
+    "sass": "^1.83.1",
     "vite-plugin-vuetify": "^2.0.4",
-    "vuetify": "^3.7.0"
+    "vuetify": "^3.7.6"
   }
 }
