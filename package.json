@@ -10,7 +10,7 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@imgly/background-removal": "^1.5.7",
+    "@imgly/background-removal": "^1.6.0",
     "@mdi/font": "^7.4.47",
     "@mdi/js": "^7.4.47",
     "@pinia/nuxt": "^0.9.0",
@@ -19,6 +19,7 @@
     "file-saver": "^2.0.5",
     "jszip": "^3.10.1",
     "nuxt": "^3.15.1",
+    "onnxruntime-web": "1.21.0-dev.20250206-d981b153d3",
     "pinia": "^2.3.0",
     "vue": "^3.5.13"
   },
